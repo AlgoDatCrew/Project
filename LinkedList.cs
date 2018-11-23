@@ -12,6 +12,7 @@ namespace Framework
 {
     abstract class LinkedListBase
     {
+        public int LastItem = 0; //Länge des Arrays für Binäre Suche
         public ListElement start;
         public ListElement LastSearchItem; //speichern des letzten gesuchten Elements
         public ListElement LastSearchItemPrev; //Vorgänger zu letztem gesuchtem Element
@@ -42,10 +43,22 @@ namespace Framework
     {
         public bool search(int elem)
         {
+            
             return true;
         }
         public bool insert(int elem)
         {
+            ListElement newElement = new ListElement(elem);
+            if (LastItem == 0)
+            {
+                start = newElement;
+            }
+            else
+            {
+                search(elem);
+                LastSearchItemPrev.next = newElement; //Der Nachfolger des Vorgängers des Letzten Suchelements ist das neue Element
+                newElement.next = LastSearchItem;  //Der Nachfolger des neuen Elements wird das Letzte Suchelement
+            }
             return true;
         }
         public bool delete(int elem)
