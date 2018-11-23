@@ -17,6 +17,37 @@ namespace Framework
         public ListElement LastSearchItem; //speichern des letzten gesuchten Elements
         public ListElement LastSearchItemPrev; //Vorgänger zu letztem gesuchtem Element
 
+        public ListElement this[int i] //indexer für Search in Sortierten Listen
+        {
+            get                //get index
+            {
+                ListElement Current = start;
+                int pos = 1;
+                while (Current != null && pos != i)
+                {
+                    Current = Current.next;
+                    pos++;
+                }
+                if (Current == null)
+                {
+                    return null;
+                }
+                return Current;
+            }
+            
+            set                //unsicher ob set notwendig... Listen müssen ja eh neu verkettet werden (LastSearch und LastSearchPrev)
+            {
+                ListElement Current = start;
+                int pos = 1;
+                while (pos < i)
+                {
+                    pos++;
+                    Current = Current.next;
+                }
+                Current = value;
+            }
+        }
+
         public class ListElement
         {
             public int number;
